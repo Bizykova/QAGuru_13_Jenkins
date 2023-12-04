@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+repositories {
+    mavenCentral()
+}
+allure {
+    version.set("2.19.0")
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.19.0")
+
+
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'com.codeborne:selenide:7.0.2'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.7'
+
+    testImplementation 'io.qameta.allure:allure-selenide:2.19.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.14.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
+    testImplementation 'commons-io:commons-io:2.15.0'
+    testImplementation 'com.codeborne:pdf-test:1.5.0'
+    testImplementation 'com.codeborne:xls-test:1.4.3'
+    testImplementation 'com.opencsv:opencsv:5.7.1'
+    testImplementation 'org.docx4j:docx4j:6.1.2'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+
+
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+    systemProperty 'allure.link.tms.pattern', 'https://jira.atlassian.com/browse/{}'
+    systemProperty 'allure.link.issue.pattern', 'https://jira.atlassian.com/browse/{}'
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+}
+
+configurations {
+    testCompile
+
+}
