@@ -48,12 +48,28 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
-test {
+//test {
+//    useJUnitPlatform()
+//    systemProperties(System.getProperties())
+//    systemProperty 'allure.link.tms.pattern', 'https://jira.atlassian.com/browse/{}'
+//    systemProperty 'allure.link.issue.pattern', 'https://jira.atlassian.com/browse/{}'
+//    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+//}
+tasks.withType(Test){
     useJUnitPlatform()
-    systemProperties(System.getProperties())
-    systemProperty 'allure.link.tms.pattern', 'https://jira.atlassian.com/browse/{}'
-    systemProperty 'allure.link.issue.pattern', 'https://jira.atlassian.com/browse/{}'
-    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+
+    testLogging {
+        lifecycle{
+            events "started","skipped","failed","standard_error","standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task simple_test(type: Test){
+    useJUnitPlatform {
+        includeTags("simple")
+    }
 }
 
 configurations {

@@ -4,13 +4,14 @@ import lesson_eight.component.CalendarComponent;
 import lesson_eight.component.CheckResult;
 import lesson_eight.faker.FakerBox;
 import lesson_eight.method.FormPage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-
+//@Tag("simple")
 public class FormPracticeTest extends TestBase {
     FormPage pageForm = new FormPage();
     CalendarComponent component = new CalendarComponent();
