@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-//@Tag("simple")
+@Tag("hom")
 public class FormPracticeTest extends TestBase {
     FormPage pageForm = new FormPage();
     CalendarComponent component = new CalendarComponent();
