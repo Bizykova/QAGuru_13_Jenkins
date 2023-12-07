@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static io.qameta.allure.Allure.attachment;
+import static io.qameta.allure.Allure.step;
 
 @Tag("home")
 public class FormPracticeTest extends TestBase {
@@ -31,6 +32,7 @@ public class FormPracticeTest extends TestBase {
     public void formTest() {
         attachment("Source", webdriver().driver().source());
         //act
+        step("fill form", () ->{
         pageForm.setFirstName(fakerBox.firstName)
                 .setLastName(fakerBox.lastName)
                 .setUserEmail(fakerBox.userEmai)
@@ -48,7 +50,9 @@ public class FormPracticeTest extends TestBase {
                 .clickCity(fakerBox.city)
                 .clickSubmit();
         new ScreenshotTest().tScreenshot();
+        });
         //assert
+        step("assert form", () -> {
         checkResult.checkResult("Student Name", fakerBox.firstName + " " + fakerBox.lastName)
                 .checkResult("Student Email", fakerBox.userEmai)
                 .checkResult("Gender", fakerBox.gender)
@@ -60,6 +64,7 @@ public class FormPracticeTest extends TestBase {
                 .checkResult("Address", fakerBox.streetAddress)
                 .checkResult("State and City", fakerBox.state + " " + fakerBox.city);
         new ScreenshotTest().tScreenshot();
+        });
     }
 
 
@@ -70,6 +75,7 @@ public class FormPracticeTest extends TestBase {
     @Owner("bizyukova")
     public void formWithEmptyFieldsTest() {
         attachment("Source", webdriver().driver().source());
+        step("fill form", () ->{
         pageForm.setFirstName(fakerBox.firstName)
                 .setLastName(fakerBox.lastName)
                 .clickGender(fakerBox.gender)
@@ -78,12 +84,15 @@ public class FormPracticeTest extends TestBase {
         component.setCalendarComponent(fakerBox.month, fakerBox.year);
         pageForm.execute()
                 .clickSubmit();
+        });
         //assert
+        step("assert form", () -> {
         checkResult.checkResult("Student Name", fakerBox.firstName + " " + fakerBox.lastName)
                 .checkResult("Gender", fakerBox.gender)
                 .checkResult("Mobile", fakerBox.phone)
                 .checkResult("Date of Birth", "01 " + fakerBox.month + "," + fakerBox.year);
         new ScreenshotTest().tScreenshot();
+        });
     }
 
 

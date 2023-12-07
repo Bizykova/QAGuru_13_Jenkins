@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static io.qameta.allure.Allure.attachment;
+import static io.qameta.allure.Allure.step;
 
 public class TestBase {
     @BeforeEach
@@ -20,11 +21,8 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         SelenideLogger.addListener("allure", new AllureSelenide());
-        open("https://demoqa.com/automation-practice-form");
+        step("open form", () -> {
+            open("https://demoqa.com/automation-practice-form");
+        });
     }
 }
-//    @Attachment(value = "scrin", fileExtension = "png")
-//    public byte[] doScreenshot(SelenideElement element) throws IOException {
-//        return Files.readAllBytes(element.screenshot().toPath());
-//    }
-//    doScreenshot(checkResult.checkResult();
