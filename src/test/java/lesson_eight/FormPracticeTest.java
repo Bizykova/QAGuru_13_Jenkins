@@ -26,9 +26,7 @@ public class FormPracticeTest extends TestBase {
 
     @Test
     @Feature("Jenkins + allure")
-    @Story("Запустить Jenkins + видео + Screenshot")
-    @Owner("bizyukova")
-    @Severity(SeverityLevel.NORMAL)
+    @Disabled
     public void formTest() {
         attachment("Source", webdriver().driver().source());
         //act
@@ -71,7 +69,7 @@ public class FormPracticeTest extends TestBase {
 
     @Test
     @Feature("Jenkins + allure")
-    @Story("Запустить Jenkins + Screenshot")
+    @Story("Запустить Jenkins + видео + Screenshot")
     @Owner("bizyukova")
     public void formWithEmptyFieldsTest() {
         attachment("Source", webdriver().driver().source());
@@ -84,6 +82,7 @@ public class FormPracticeTest extends TestBase {
         component.setCalendarComponent(fakerBox.month, fakerBox.year);
         pageForm.execute()
                 .clickSubmit();
+        new ScreenshotTest().tScreenshot();
         });
         //assert
         step("assert form", () -> {
@@ -101,8 +100,11 @@ public class FormPracticeTest extends TestBase {
     @Feature("Jenkins + allure")
     @Story("Запустить Jenkins")
     @Owner("bizyukova")
-    @Disabled
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Запустить Jenkins + Screenshot")
     public void formPhoneBorderRedTest() {
+        attachment("Source", webdriver().driver().source());
+        step("fill form", () ->{
         String phoneNumberIsIncorrect = "3456789";
         pageForm.setFirstName(fakerBox.firstName)
                 .setLastName(fakerBox.lastName)
@@ -112,8 +114,13 @@ public class FormPracticeTest extends TestBase {
         component.setCalendarComponent(fakerBox.month, fakerBox.year);
         pageForm.execute()
                 .clickSubmit();
+        new ScreenshotTest().tScreenshot();
+        });
         //assert
+        step("assert form", () -> {
         $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        new ScreenshotTest().tScreenshot();
+        });
     }
 
 }
