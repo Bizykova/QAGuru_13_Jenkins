@@ -65,11 +65,17 @@ tasks.withType(Test){
         }
     }
 }
-
-task simple_test(type: Test){
+//
+//task simple_test(type: Test){
+//    useJUnitPlatform {
+//        includeTags("home")
+//        excludeTags("simple")
+//    }
+//}
+task home_test(type: Test){
     useJUnitPlatform {
         includeTags("home")
-        excludeTags("simple")
+
     }
 }
 
