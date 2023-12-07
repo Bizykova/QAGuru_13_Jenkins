@@ -1,6 +1,5 @@
 package lesson_eight;
 
-import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.*;
 import lesson_eight.component.CalendarComponent;
 import lesson_eight.component.CheckResult;
@@ -10,8 +9,6 @@ import lesson_eight.screen.ScreenshotTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.$;

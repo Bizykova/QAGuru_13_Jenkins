@@ -18,6 +18,7 @@ public class TestBase {
     @BeforeEach
     void setUp(){
         Configuration.pageLoadStrategy = "eager";
+        Configuration.remote = "https://user1:1234@selenoid.autotest.cloud/wd/hub";
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://demoqa.com/automation-practice-form");
     }
