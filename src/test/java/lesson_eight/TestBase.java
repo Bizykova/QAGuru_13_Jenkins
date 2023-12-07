@@ -1,18 +1,17 @@
 package lesson_eight;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Attachment;
+import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import java.net.URI;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static io.qameta.allure.Allure.attachment;
 import static io.qameta.allure.Allure.step;
 
 public class TestBase {
@@ -20,9 +19,33 @@ public class TestBase {
     void setUp(){
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        SelenideLogger.addListener("allure", new AllureSelenide());
         step("open form", () -> {
             open("https://demoqa.com/automation-practice-form");
         });
+        // для примера ( не удалять)
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", "UNKNOWN");
+//        capabilities.setCapability("browserVersion", "");
+//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+//        RemoteWebDriver driver = new RemoteWebDriver(
+//                URI.create("http://selenoid:4444/wd/hub").toURL(),
+//                capabilities
+//        );
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
     }
 }

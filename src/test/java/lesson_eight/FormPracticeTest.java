@@ -1,5 +1,6 @@
 package lesson_eight;
 
+import helpers.Attach;
 import io.qameta.allure.*;
 import lesson_eight.component.CalendarComponent;
 import lesson_eight.component.CheckResult;
