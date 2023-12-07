@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static io.qameta.allure.Allure.attachment;
 
-//@Tag("home")
+@Tag("home")
 public class FormPracticeTest extends TestBase {
     FormPage pageForm = new FormPage();
     CalendarComponent component = new CalendarComponent();
