@@ -26,7 +26,8 @@ public class TestBase {
             System.out.format("%s=%s%n", envName, env.get(envName));
         }
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+       // Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://user1:1234@"+env.get("REMOTE_DRIVER_URL")+"/wd/hub";
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
