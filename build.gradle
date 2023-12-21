@@ -56,6 +56,7 @@ compileTestJava {
 //    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
 //}
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -66,14 +67,20 @@ tasks.withType(Test) {
     }
 }
 
-//task simple_test(type: Test) {
-//
-//    useJUnitPlatform {
-//        excludeTags("home")
-//        includeTags("simple")
-//    }
-//}
-task home_test(type: Test){
+task simple_test(type: Test) {
+
+    useJUnitPlatform {
+        excludeTags("home")
+        includeTags("simple")
+    }
+}
+task property_test(type: Test) {
+
+    useJUnitPlatform {
+        includeTags("property")
+    }
+}
+task home_test(type: Test) {
     clean
     useJUnitPlatform {
         includeTags("home")
